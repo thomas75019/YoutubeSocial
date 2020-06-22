@@ -1,0 +1,11 @@
+{
+  "name": "youtubesocial",
+  "version": "1.0.0",
+  "description": "A Social Network for Youtube watchers and creators",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Thomas Larousse <tlarousse3@gmail.com>",
+  "license": "ISC"
+}
