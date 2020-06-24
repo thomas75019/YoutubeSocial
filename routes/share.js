@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const shareCtrl = require('../controllers/share');
-const Share = require('../models/share');
 
 router.get('/:id', shareCtrl.getOneShare);
 router.get('/:id_user', shareCtrl.getAllShares);
