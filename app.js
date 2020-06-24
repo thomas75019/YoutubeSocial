@@ -22,22 +22,10 @@ app.use((req, res, next) => {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 app.post('/api/like', (req, res, next) => {
-    console.log(req.body)
-    const like = new Like({
-        ...req.body
-    });
-    like.save()
-        .then(() => {
-            res.status(201).json({message: "worked"})
-        })
-        .catch( error => {
-            res.status(401).json({message : error})
-        })
+
 });
 app.get('/api/likes', (req, res, next) => {
-    Like.find()
-        .then( likes => res.status(200).json({likes}))
-        .catch( error => res.status(404).json({error}))
+
 });
 
 module.exports = app;
