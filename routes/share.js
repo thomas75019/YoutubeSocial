@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
+const shareCtrl = require('../controllers/share');
 const Share = require('../models/share');
 
-router.get('/share/:id');
-router.get('/shares');
-router.post('/share');
-router.patch('/share');
-router.del('/share');
+router.get('/:id', shareCtrl.getOneShare);
+router.get('/:id_user', shareCtrl.getAllShares);
+router.post('/', shareCtrl.createShare);
+router.patch('/:id', shareCtrl.updateShare);
+router.delete('/:id', shareCtrl.deleteShare);
 
 module.exports = router;

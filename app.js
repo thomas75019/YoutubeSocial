@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const likeRoutes = require('./routes/like');
+const shareRoutes = require('./routes/share');
 require('dotenv').config();
 
 mongoose.connect(process.env.MONGOOSE,
@@ -22,5 +23,6 @@ app.use((req, res, next) => {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/api/like', likeRoutes);
+app.use('/api/share', shareRoutes);
 
 module.exports = app;

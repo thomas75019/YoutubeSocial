@@ -1,5 +1,4 @@
 const Like = require('../models/like');
-const mongoose = require('mongoose');
 
 exports.CreateLike = (req, res, next) => {
     const like = new Like({
