@@ -7,7 +7,7 @@ exports.CreateLike = (req, res, next) => {
     });
     like.save()
         .then(() => {
-            res.status(201).json({message: "worked"})
+            res.status(201).json({message: "Created"})
         })
         .catch( error => {
             res.status(401).json({message : error})
@@ -19,7 +19,7 @@ exports.GetLikes = (req, res, next) => {
         .catch( error => res.status(404).json({error}))
 };
 exports.GetOneLike = (req, res, next) => {
-    Like.findeOne({
+    Like.findOne({
         _id : req.params.id
     })
         .then( like => res.status(200).json({like}))

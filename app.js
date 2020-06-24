@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const Like = require('./models/like');
 const bodyParser = require('body-parser');
+const likeRoutes = require('./routes/like');
 require('dotenv').config();
 
 mongoose.connect(process.env.MONGOOSE,
@@ -20,12 +20,7 @@ app.use((req, res, next) => {
     next();
 });
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json())
-app.post('/api/like', (req, res, next) => {
-
-});
-app.get('/api/likes', (req, res, next) => {
-
-});
+app.use(bodyParser.json());
+app.use('/api/like', likeRoutes);
 
 module.exports = app;
