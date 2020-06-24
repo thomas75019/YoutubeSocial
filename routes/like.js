@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-const Like = require('../models/like');
 const likeCtrl = require('../controllers/like');
 
 router.post('/like', likeCtrl.CreateLike);
