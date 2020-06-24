@@ -3,8 +3,12 @@ const mongoose = require('mongoose');
 const userSchema = mongoose.Schema({
     _id: { type: Number, required: true },
     type: { type: String, required: true },
-    following: { type: Array, required: false},
-    follower: {type: Array, required: false}
+    following: {
+        user_id: {type: Number, required: false}
+    },
+    follower: {
+        user_id: {type: Number, required: false}
+    }
 });
 
 
