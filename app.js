@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const likeRoutes = require('./routes/like');
 const shareRoutes = require('./routes/share');
+const userRoutes = require('./routes/user');
 require('dotenv').config();
 
 mongoose.connect(process.env.MONGOOSE,
@@ -24,5 +25,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/api/like', likeRoutes);
 app.use('/api/share', shareRoutes);
+app.use('/api/user', userRoutes);
 
 module.exports = app;
