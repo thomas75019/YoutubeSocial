@@ -1,7 +1,7 @@
 const Share = require('../models/share');
 
 exports.getAllShares = (req, res, next) => {
-    Share.findBy({
+    Share.find({
         user_id : req.params.user_id
     })
         .then(shares => res.status(200).json({shares}))
@@ -9,7 +9,7 @@ exports.getAllShares = (req, res, next) => {
 };
 
 exports.getOneShare = (req, res, next) => {
-    Share.findBy({
+    Share.findOne({
         _id : req.params.id
     })
         .then(share => res.status(200).json({share}))
