@@ -1,7 +1,9 @@
 const Like = require('../models/like');
+const { v4: uuidv4 } = require('uuid');
 
 exports.CreateLike = (req, res, next) => {
     const like = new Like({
+        _id : uuidv4(),
         ...req.body
     });
     like.save()
