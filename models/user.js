@@ -26,10 +26,28 @@ const userSchema = mongoose.Schema({
         required: [true, 'Password is required']
     },
     following: {
-        user_id: {type: Number, required: false}
+        user_id: {
+            type: String,
+            required: false,
+            validate: {
+                validator: value => {
+                    return value.length === 36
+                },
+                message: props => `${props.value} is not a valid ID`
+            }
+        }
     },
     follower: {
-        user_id: {type: Number, required: false}
+        user_id: {
+            type: String,
+            required: false,
+            validate: {
+                validator: value => {
+                    return value.length === 36
+                },
+                message: props => `${props.value} is not a valid ID`
+            }
+        }
     }
 });
 
