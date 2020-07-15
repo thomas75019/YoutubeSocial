@@ -43,28 +43,32 @@ exports.login = (req, res, next) => {
         })
         .catch(error => res.status(500).json({ error }));
 };
-exports.addFollower =  async (req, res, next) => {
-    const user =  await User.findOne({
-        _id: req.body._id
-    });
-
-    user.follower = req.body.user_id;
-    user.save()
-        .then(() => {
-        res.status(201).json({message: "Follower Added"})
+exports.addFollower =  (req, res, next) => {
+    const follower = {user_id: req.body.user_id};
+    User.findOneAndUpdate(
+    {
+        _id: req.body.id
+    },
+        { $push: { follower: follower }
     })
+        .then( () => {
+            res.status(201).json({message: "Follower Added"})
+        })
         .catch( error => {
             res.status(401).json({message : error.message })
         })
-};
-exports.addFollowing = async (req, res, next) => {
-    const user =  await User.findOne({
-        _id: req.body._id
-    });
 
-    user.following = req.body.user_id;
-    user.save()
-        .then(() => {
+};
+exports.addFollowing = (req, res, next) => {
+
+    const following = {user_id: req.body.user_id};
+    User.findOneAndUpdate(
+        {
+            _id: req.body.id
+        },
+        { $push: { follower: following }
+        })
+        .then( () => {
             res.status(201).json({message: "Following Added"})
         })
         .catch( error => {
