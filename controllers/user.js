@@ -78,7 +78,7 @@ exports.addFollowing = (req, res, next) => {
 exports.getUser = (req, res, next) => {
     User.findOne(
         {
-            email: req.body.email
+            email: req.params.email
         })
         .then( user => {
             res.status(200).json({
