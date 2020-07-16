@@ -20,9 +20,8 @@ exports.CreateLike = (req, res, next) => {
 exports.GetLikes = (req, res, next) => {
     Like.find()
         .then( likes => {
-                let data = [];
-                likes.forEach( (like) => {
-                    data.push({
+                let data = likes.map( (like) => {
+                    return {
                         _id: like._id,
                         date: like.date,
                         user_id: like.user_id,
@@ -30,7 +29,7 @@ exports.GetLikes = (req, res, next) => {
                             { rel: "self",title :"Get like", method: "GET", href: 'http://localhost:3000/api/like/' + like._id },
                             { rel: "delete",title :"delete like", method: "DELETE", href: 'http://localhost:3000/api/like/' + like._id }
                         ]
-                    })
+                    }
                 });
             res.status(200).json(data);
 
