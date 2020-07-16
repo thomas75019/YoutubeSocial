@@ -1,5 +1,6 @@
 const Like = require('../models/like');
 const { v4: uuidv4 } = require('uuid');
+require('dotenv').config();
 
 exports.CreateLike = (req, res, next) => {
     const like = new Like({
@@ -9,8 +10,8 @@ exports.CreateLike = (req, res, next) => {
     like.save()
         .then((like) => {
             res.status(201).json(like,[
-                { rel: "self",title :"Get like", method: "GET", href: 'http://localhost:3000/api/like/' + like._id },
-                { rel: "delete",title :"delete like", method: "DELETE", href: 'http://localhost:3000/api/like/' + like._id },
+                { rel: "self",title :"Get like", method: "GET", href: process.env.HOST + 'api/like/' + like._id },
+                { rel: "delete",title :"delete like", method: "DELETE", href: process.env.HOST + '/api/like/' + like._id },
         ])
         })
         .catch( error => {
@@ -26,8 +27,8 @@ exports.GetLikes = (req, res, next) => {
                         date: like.date,
                         user_id: like.user_id,
                         links: [
-                            { rel: "self",title :"Get like", method: "GET", href: 'http://localhost:3000/api/like/' + like._id },
-                            { rel: "delete",title :"delete like", method: "DELETE", href: 'http://localhost:3000/api/like/' + like._id }
+                            { rel: "self",title :"Get like", method: "GET", href: process.env.HOST + 'api/like/' + like._id },
+                            { rel: "delete",title :"delete like", method: "DELETE", href: process.env.HOST + '/api/like/' + like._id },
                         ]
                     }
                 });
@@ -42,7 +43,7 @@ exports.GetOneLike = (req, res, next) => {
         _id : req.params.id
     })
         .then( like => res.status(200).json({like}, [
-            { rel: "delete",title :"delete like", method: "DELETE", href: 'http://localhost:3000/api/like/' + like._id },
+            { rel: "delete",title :"delete like", method: "DELETE", href: process.env.HOST + '/api/like/' + like._id },
         ]))
         .catch( error => res.status(404).json({error}))
 };
