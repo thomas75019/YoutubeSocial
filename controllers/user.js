@@ -75,3 +75,21 @@ exports.addFollowing = (req, res, next) => {
             res.status(401).json({message : error.message })
         })
 };
+exports.getUser = (req, res, next) => {
+    User.findOne(
+        {
+            email: req.body.email
+        })
+        .then( user => {
+            res.status(200).json({
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                follower: user.follower,
+                following: user.following
+            });
+        })
+        .catch( error => {
+            res.status(404).json({message: error.message})
+        });
+};
