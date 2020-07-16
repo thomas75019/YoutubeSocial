@@ -6,6 +6,7 @@ const likeRoutes = require('./routes/like');
 const shareRoutes = require('./routes/share');
 const userRoutes = require('./routes/user');
 const auth = require('./middleware/auth');
+const hateoasLinker = require('express-hateoas-links');
 require('dotenv').config();
 
 mongoose.connect(process.env.MONGOOSE,
@@ -24,6 +25,7 @@ app.use((req, res, next) => {
 });
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(hateoasLinker);
 app.use('/api/like', auth, likeRoutes);
 app.use('/api/share', auth, shareRoutes);
 app.use('/api/user', userRoutes);

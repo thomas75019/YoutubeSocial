@@ -7,23 +7,44 @@ exports.CreateLike = (req, res, next) => {
         ...req.body
     });
     like.save()
-        .then(() => {
-            res.status(201).json({message: "Created"})
+        .then((like) => {
+            res.status(201).json(like,[
+                { rel: "self",title :"Get like", method: "GET", href: 'http://localhost:3000/api/like/' + like._id },
+                { rel: "delete",title :"delete like", method: "DELETE", href: 'http://localhost:3000/api/like/' + like._id },
+        ])
         })
         .catch( error => {
-            res.status(401).json({message : error})
+            res.status(400).json(error)
         })
 };
 exports.GetLikes = (req, res, next) => {
     Like.find()
-        .then( likes => res.status(200).json({likes}))
-        .catch( error => res.status(404).json({error}))
+        .then( likes => {
+                let data = [];
+                likes.forEach( (like) => {
+                    data.push({
+                        _id: like._id,
+                        date: like.date,
+                        user_id: like.user_id,
+                        links: [
+                            { rel: "self",title :"Get like", method: "GET", href: 'http://localhost:3000/api/like/' + like._id },
+                            { rel: "delete",title :"delete like", method: "DELETE", href: 'http://localhost:3000/api/like/' + like._id }
+                        ]
+                    })
+                });
+            res.status(200).json(data);
+
+            }
+        )
+        .catch( error => res.status(404).json({message: error.message}))
 };
 exports.GetOneLike = (req, res, next) => {
     Like.findOne({
         _id : req.params.id
     })
-        .then( like => res.status(200).json({like}))
+        .then( like => res.status(200).json({like}, [
+            { rel: "delete",title :"delete like", method: "DELETE", href: 'http://localhost:3000/api/like/' + like._id },
+        ]))
         .catch( error => res.status(404).json({error}))
 };
 exports.DelOneLike = (req, res, next) => {
