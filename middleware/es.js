@@ -13,14 +13,15 @@ function checkUserIndices() {
     })
 }
 
-module.exports = (next) => {
-    client.ping({}, { requestTimeout: 20000 }, (err) => {
+module.exports = () => {
+    client.ping({}, { requestTimeout: 20000 }, (err, res, next) => {
         if(err) {
             console.log('The cluster is down')
         }
         else {
-            checkUserIndices()
-                .then(() => next());
+            checkUserIndices();
+            res.locals.client = client;
+            next();
         }
     })
 }

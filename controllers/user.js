@@ -1,8 +1,7 @@
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 const jwt = require('jsonwebtoken');
-const client = require('../services/elasticClient');
-const indexUser = require('../services/indexUser')
+const indexUser = require('../services/indexUser');
 
 const User = require('../models/user');
 
@@ -18,7 +17,7 @@ exports.signup = (req, res, next) => {
             user.save()
                 .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
                 .then(() => {
-                    indexUser(user, client);
+                    indexUser(user, res.locals.client);
                 })
                 .catch(error => res.status(400).json({ error }));
         })
