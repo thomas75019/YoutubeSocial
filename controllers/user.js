@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 const jwt = require('jsonwebtoken');
+const client = require('../services/elasticClient');
 
 const User = require('../models/user');
 
